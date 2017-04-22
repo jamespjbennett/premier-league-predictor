@@ -1,0 +1,8 @@
+li{
+	list-style-type:none;
+}
+
+#top-scorers-list{
+    padding-left: 0;
+    margin-left: -15px;	
+}
