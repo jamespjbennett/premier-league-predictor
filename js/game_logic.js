@@ -99,9 +99,38 @@ function playFixtureRound(){
 function populateTopScorerList(){
 	var scorersOrdered = sortScorerTable();
 	var topScorerContainer=document.getElementById("top-scorers-list");
+	var teamTopScorerContainer=document.getElementById("team-top-scorers-list");
 	topScorerContainer.innerHTML = "";	
 	for(i=0;i<=9;i++){
 		topScorerContainer.insertAdjacentHTML('beforeend', '<li><div class="col-xs-3">' +  scorersOrdered[i].key + '</div><div class="col-xs-3">' + scorersOrdered[i].value +'</div></li><br>');	
+	}
+	teamTopScorerContainer.innerHTML = "";	
+	for(i=0;i<Object.keys(teams).length;i++){
+		teamTopScorerContainer.insertAdjacentHTML('beforeend', '<div class="col-xs-6 team-scorer-element" id="'+ Object.keys(teams)[i]+'">' +  Object.keys(teams)[i] +'<br>');	
+	}
+	var teamTopScorerTeamElements= document.getElementsByClassName('team-scorer-element');
+	for(x=0;x<teamTopScorerTeamElements.length;x++){
+		console.log(x);
+		var teamElement = teamTopScorerTeamElements[x].id;
+		console.log(teamElement)
+		// teamTopScorerTeamElements[i].insertAdjacentHTML('beforeEnd', '<br>');
+		teamTopScorerContainer.insertAdjacentHTML('beforeEnd', '<div id="'+teamElement+'-dropdown" class="team-info-wrapper hide"></div>');
+		// teamTopScorerTeamElements[i].insertAdjacentHTML('beforeEnd', '<div id="'++'dropdown"></div>');
+		var dropdownToPopulate = document.getElementById(teamElement+'-dropdown');
+		dropdownToPopulate.insertAdjacentHTML('beforeend', '<h4 class="team-name-info">'+teamElement+'</h4>');
+		for(scorer in totalScorersWithTeam[teamElement]){
+			dropdownToPopulate.insertAdjacentHTML('beforeend', '<p>'+scorer+' - <span>'+totalScorersWithTeam[teamElement][scorer]+'</span></p>');
+		};
+		dropdownToPopulate.insertAdjacentHTML('beforeend', '<button  class="back-to-all-team-stats btn btn-primary">Back</button>');
+
+		var backButtons = document.getElementsByClassName('back-to-all-team-stats');
+		for (var i = 0; i < backButtons.length; i++) {
+		    backButtons[i].addEventListener('click', backToAllTeams, false);
+		}		
+	};
+	var teamScorerElements = document.getElementsByClassName('team-scorer-element');
+	for (var i = 0; i < teamScorerElements.length; i++) {
+	    teamScorerElements[i].addEventListener('click', showTeamsStats, false);
 	}
 }
 
@@ -174,6 +203,23 @@ function sortScorerTable(){
 		return (a.value - b.value);
 	});
 	return sorted.reverse();
+
+};
+
+function sortTeamScorerTable(team){
+	var team_scorer_array = [];
+	for (var key in team) {
+	    if (team.hasOwnProperty(key)) {
+	        team_scorer_array.push({
+	            'key': key,
+	            'value': team[key].valueOf()
+	        })   
+	    }
+	};
+	var team_scorer_array_sorted = team_scorer_array.sort(function(a, b){
+		return (a.value - b.value);
+	});
+	return team_scorer_array_sorted.reverse();
 
 };
 

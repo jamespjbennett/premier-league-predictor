@@ -17,3 +17,26 @@ function switchActiveNavContent(e){
 	var idToTarget = this.id + "-section";
 	document.getElementById(idToTarget).classList.add('show');
 };
+
+function showTeamsStats(e){
+	console.log('hit show team stats');
+
+	var team = this.id;
+	var teamScorerElements = document.getElementsByClassName('team-scorer-element');
+	for (var i = 0; i < teamScorerElements.length; i++) {
+	    teamScorerElements[i].classList.remove('show');
+	    teamScorerElements[i].classList.add('hide');
+	};
+	document.getElementById(team +'-dropdown').classList.add('show');
+};
+
+function backToAllTeams(e){
+	console.log('hit back to all teams');
+	this.parentElement.classList.remove('show');
+	this.parentElement.classList.add('hide');
+	var teamStatLinks = document.getElementsByClassName('team-scorer-element');
+	for (var i = 0; i < teamStatLinks.length; i++) {
+	    teamStatLinks[i].classList.remove('hide');
+	    teamStatLinks[i].classList.add('show');
+	}	
+}
