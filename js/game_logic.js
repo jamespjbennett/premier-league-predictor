@@ -38,14 +38,27 @@ function play_game(first_team, second_team){
 	var away_team = teams[second_team];
 	var home_score = score_calculation(home_team, away_team);
 	var away_score = score_calculation(away_team, home_team);
-	pickScorers(first_team, home_score);
-	pickScorers(second_team, away_score);
+	if(home_score != away_score){
+		var min = Math.min(home_score, away_score);
+		if(home_score == min){
+			var homeEmptyDivsToPopulate = away_score - home_score;
+			var awayEmptyDivsToPopulate = 0;
+		}else{
+			var awayEmptyDivsToPopulate = home_score - away_score;
+			var homeEmptyDivsToPopulate = 0; 
+		}
+	}else{
+		var awayEmptyDivsToPopulate = 0;
+		var homeEmptyDivsToPopulate = 0 ;		
+	}
+	pickScorers(first_team, home_score, homeEmptyDivsToPopulate);
+	pickScorers(second_team, away_score, awayEmptyDivsToPopulate);
 	document.querySelector('.fixture--' + first_team.replace(/\s+/g, '') +' span').innerHTML = first_team + "   " + home_score;
 	document.querySelector('.fixture--' + second_team.replace(/\s+/g, '') +' span').innerHTML = second_team + "   " + away_score;
 	adjustTable(first_team, second_team, home_score,away_score);
 };
 
-function pickScorers(team, score){
+function pickScorers(team, score, emptyDivs){
 	for(y=0; y<score; y++){
 		var random = parseFloat(((Math.random() * 100) / 10).toFixed(1))
 		var players = teams[team]['players'];
@@ -57,7 +70,11 @@ function pickScorers(team, score){
 		    i++;
 		};
 		var scorer = Object.keys(players).filter(function(el){return players[el] == number})[0];
+		document.querySelector('.fixture--' + team.replace(/\s+/g, '')).insertAdjacentHTML('beforeend','<p>'+scorer+'</p>');
 		!totalScorers[scorer] ?  totalScorers[scorer] = 1 : totalScorers[scorer] += 1;
+	};
+	for(y=0; y<emptyDivs; y++){
+		document.querySelector('.fixture--' + team.replace(/\s+/g, '')).insertAdjacentHTML('beforeend','<p></p>');
 	};
 };
 
@@ -105,15 +122,15 @@ function populateVisualFixtures(){
 
 	}
 	fixtureListContainer.innerHTML = "";
-	fixtureListContainer.insertAdjacentHTML('beforeend', '<h3 class="content-header">Fixtures/Results:</h3>');
+	// fixtureListContainer.insertAdjacentHTML('beforeend', '<h3 class="content-header">Fixtures/Results:</h3>');
 
 	for (i=0;i <=9;i++) {
 
 	    fixtureListContainer.insertAdjacentHTML('beforeend', '<div id="fixture-' + fixtures[i][first].replace(/\s+/g, '') + '--' + fixtures[i][second].replace(/\s+/g, '')+'"></div>');
 	    var fixtureRow = document.getElementById('fixture-' + fixtures[i][first].replace(/\s+/g, '') + '--' +  fixtures[i][second].replace(/\s+/g, ''));
 	    fixtureRow.insertAdjacentHTML('beforeend', '<div class="col-xs-5 fixture-row fixture--' +  fixtures[i][first].replace(/\s+/g, '') + '"><span>' + fixtures[i][first] +'</span></div>');
-	    fixtureRow.insertAdjacentHTML('beforeend', '<div class="col-xs-2 team-name"><span> vs </span></div>');
-	    fixtureRow.insertAdjacentHTML('beforeend', '<div class="col-xs-5 fixture--' +  fixtures[i][second].replace(/\s+/g, '') + '"><span>' + fixtures[i][second] +'</span></div>');
+	    fixtureRow.insertAdjacentHTML('beforeend', '<div class="col-xs-2 team-name"><p class="vs-separator"> vs </p></div>');
+	    fixtureRow.insertAdjacentHTML('beforeend', '<div class="col-xs-5 fixture-row fixture--' +  fixtures[i][second].replace(/\s+/g, '') + '"><span>' + fixtures[i][second] +'</span></div>');
 	};  	
 	document.getElementById('next-fixture').classList.add("hide");
 	document.getElementById('play-fixture').classList.remove("hide");

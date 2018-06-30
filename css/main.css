@@ -23,7 +23,20 @@ li{
 .content-header{
 	font-family: Moon2-bold;
 	letter-spacing: 3px;
+	word-spacing: -11px;
 }
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+	background-color: #FF8552;
+    border-color: #FF8552;
+    color: white;
+}
+
+.nav-tabs>li>a{
+	color:white;
+}
+
+
 .btn-primary{
 	color: #fff;
 	background-color: #FF8552;
@@ -33,7 +46,12 @@ li{
 }
 
 .btn-primary:hover{
-	background:#297373
+	background:#297373!important;
+	border-color: #FF8552;
+}
+
+.nav-tabs>li>a:hover{
+	background:#297373	
 }
 
 .team-name {
@@ -43,7 +61,8 @@ li{
 .main-wrapper{
 	background: #39393A!important;
 	color: #E6E6E6;
-	height:100vh;
+    height: 91vh;
+    overflow: hidden;
 	font-family: avenir;
 }
 
@@ -54,9 +73,28 @@ li{
 #play-fixture, #next-fixture{
 	margin-left: -6.5%;
 }
+.vs-separator{
+    margin-bottom: 0px;
+    margin-top: 10px;
+    font-size: 13px;	
+}
 
 .fixture-row{
 	margin-left:-2.5%;
+	margin-top: 10px;
+}
+
+.fixture-row p{
+    height: 16px;
+    margin-bottom: 1px;
+    color: #ffffff9c;
+    font-size: 13px;
+
+}
+
+#fixture-table{
+    height: 380px;
+    overflow: scroll;
 }
 
 @font-face { 
