@@ -72,6 +72,7 @@ function pickScorers(team, score, emptyDivs){
 		var scorer = Object.keys(players).filter(function(el){return players[el] == number})[0];
 		document.querySelector('.fixture--' + team.replace(/\s+/g, '')).insertAdjacentHTML('beforeend','<p>'+scorer+'</p>');
 		!totalScorers[scorer] ?  totalScorers[scorer] = 1 : totalScorers[scorer] += 1;
+		!totalScorersWithTeam[team][scorer] ?  totalScorersWithTeam[team][scorer] = 1 : totalScorersWithTeam[team][scorer] += 1;
 	};
 	for(y=0; y<emptyDivs; y++){
 		document.querySelector('.fixture--' + team.replace(/\s+/g, '')).insertAdjacentHTML('beforeend','<p></p>');

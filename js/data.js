@@ -442,12 +442,13 @@ var teams = {
 
 };
 
-var totalScorers = {};
-
-var leagueObject = {};
 var teamsNamesArray = Object.keys(teams);
+var totalScorers = {};
+var totalScorersWithTeam = {};
+var leagueObject = {};
 for(team in teams){
 	leagueObject[team] = {for: 0, against: 0,  points: 0, diff : 0};
+	totalScorersWithTeam[team] = {}
 };
 
 var allFixtureObject =  {};
