@@ -83,13 +83,13 @@ var teams = {
 		}
 	},
 	'Wolves':{
- 		'attack': 81,
+ 		'attack': 79,
 		'defence': 3.8,
-		'goals' : 4.5,
+		'goals' : 4.2,
 		'opponents' : [],
 		'players' : {
 			'Jota' : 9.9,
-			'Bonatini' : 6.1,
+			'Bonatini' : 7.1,
 			'Caveleiro' : 5.1,
 			'Afobe' : 4.1,
 			'Neves': 4.0,
