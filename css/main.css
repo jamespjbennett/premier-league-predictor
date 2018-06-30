@@ -20,6 +20,10 @@ li{
 	letter-spacing: 7px;
 }
 
+.content-header{
+	font-family: Moon2-bold;
+	letter-spacing: 3px;
+}
 .btn-primary{
 	color: #fff;
 	background-color: #FF8552;
@@ -37,6 +41,14 @@ li{
 	color: #E6E6E6;
 	height:100vh;
 	font-family: avenir;
+}
+
+#play-fixture, #next-fixture{
+	margin-left: -6.5%;
+}
+
+.fixture-row{
+	margin-left:-2.5%;
 }
 
 @font-face { 

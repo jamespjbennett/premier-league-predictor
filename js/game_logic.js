@@ -105,11 +105,13 @@ function populateVisualFixtures(){
 
 	}
 	fixtureListContainer.innerHTML = "";
+	fixtureListContainer.insertAdjacentHTML('beforeend', '<h3 class="content-header">Fixtures/Results:</h3>');
+
 	for (i=0;i <=9;i++) {
 
 	    fixtureListContainer.insertAdjacentHTML('beforeend', '<div id="fixture-' + fixtures[i][first].replace(/\s+/g, '') + '--' + fixtures[i][second].replace(/\s+/g, '')+'"></div>');
 	    var fixtureRow = document.getElementById('fixture-' + fixtures[i][first].replace(/\s+/g, '') + '--' +  fixtures[i][second].replace(/\s+/g, ''));
-	    fixtureRow.insertAdjacentHTML('beforeend', '<div class="col-xs-5 fixture--' +  fixtures[i][first].replace(/\s+/g, '') + '"><span>' + fixtures[i][first] +'</span></div>');
+	    fixtureRow.insertAdjacentHTML('beforeend', '<div class="col-xs-5 fixture-row fixture--' +  fixtures[i][first].replace(/\s+/g, '') + '"><span>' + fixtures[i][first] +'</span></div>');
 	    fixtureRow.insertAdjacentHTML('beforeend', '<div class="col-xs-2 team-name"><span> vs </span></div>');
 	    fixtureRow.insertAdjacentHTML('beforeend', '<div class="col-xs-5 fixture--' +  fixtures[i][second].replace(/\s+/g, '') + '"><span>' + fixtures[i][second] +'</span></div>');
 	};  	
