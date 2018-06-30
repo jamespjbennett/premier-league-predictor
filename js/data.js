@@ -78,7 +78,7 @@ var teams = {
 			'Van La Parra' : 6.5,
 			'Ince': 6.4,
 			'Pritchard': 6.1,
-			'Kachunga': 5.5,
+			'Kachunga': 4.0,
 
 		}
 	},
