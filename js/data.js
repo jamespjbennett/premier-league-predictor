@@ -238,7 +238,7 @@ var teams = {
 		'players' : {
 			'Aguero' : 9.9,
 			'Jesus' : 7.4,
-			'De Bruyne' : 4.9,
+			'De Bruyne' : 4.4,
 			'Bernardo Silva' : 2.0,
 			'Sterling': 6.1,
 			'Sane' : 4.9,
