@@ -121,11 +121,11 @@ var intervalID = setInterval(function () {
 	timer+=1;
 	gameStats['minutesPlayed'] == timer;
    if(minuteStats[timer]['team1Shots'] != 0){
- 	  incrementShotsAndCalculateScoreLikelihood('MANU',minuteStats[timer]['team1Shots'], timer, gameStats, 'team1Score', 'team1Scorers', 'team1Shots');
+ 	  incrementShotsAndCalculateScoreLikelihood('Manchester United',minuteStats[timer]['team1Shots'], timer, gameStats, 'team1Score', 'team1Scorers', 'team1Shots');
    }else{
    };
    if(minuteStats[timer]['team2Shots'] != 0){
- 	  incrementShotsAndCalculateScoreLikelihood('BOURNEMOUTH', minuteStats[timer]['team2Shots'], timer, gameStats, 'team2Score', 'team2Scorers', 'team2Shots');
+ 	  incrementShotsAndCalculateScoreLikelihood('Bournemouth', minuteStats[timer]['team2Shots'], timer, gameStats, 'team2Score', 'team2Scorers', 'team2Shots');
    };  
    if(minuteStats[timer]['team2Shots'] + minuteStats[timer]['team1Shots'] == 0){
 		console.log(timer + ' minutes: MANU ' + gameStats['team1Score'] + ' BOURN ' + gameStats['team2Score']);
@@ -142,7 +142,7 @@ function incrementShotsAndCalculateScoreLikelihood(teamName, shotCount, minute, 
 		gameStats[shots] += 1;
 		if(isAGoal()){
 			gameStats[score] +=1;
-			gameStats[scorers][minute] = "Scorer name";
+			gameStats[scorers][minute] = scorerName(teamName);
 			console.log('GOAL FOR '+teamName+'!! score is MANU ' + gameStats['team1Score'] + ' BOURN ' + gameStats['team2Score'] );
 		}else{
 			console.log('shot for '+teamName+'. score is MANU ' + gameStats['team1Score'] + ' BOURN ' + gameStats['team2Score'] );

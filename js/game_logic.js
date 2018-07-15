@@ -58,18 +58,32 @@ function play_game(first_team, second_team){
 	adjustTable(first_team, second_team, home_score,away_score);
 };
 
+function scorerName(team){
+	var random = parseFloat(((Math.random() * 100) / 10).toFixed(1))
+	var players = teams[team]['players'];
+	var scores = Object.values(players).sort();
+	var i = 0;
+	while (i < scores.length) {
+	    number  = scores[i]
+		if (random <= scores[i]) { break; }
+	    i++;
+	};
+	return Object.keys(players).filter(function(el){return players[el] == number})[0];
+};
+
 function pickScorers(team, score, emptyDivs){
 	for(y=0; y<score; y++){
-		var random = parseFloat(((Math.random() * 100) / 10).toFixed(1))
-		var players = teams[team]['players'];
-		var scores = Object.values(players).sort();
-		var i = 0;
-		while (i < scores.length) {
-		    number  = scores[i]
-			if (random <= scores[i]) { break; }
-		    i++;
-		};
-		var scorer = Object.keys(players).filter(function(el){return players[el] == number})[0];
+		// var random = parseFloat(((Math.random() * 100) / 10).toFixed(1))
+		// var players = teams[team]['players'];
+		// var scores = Object.values(players).sort();
+		// var i = 0;
+		// while (i < scores.length) {
+		//     number  = scores[i]
+		// 	if (random <= scores[i]) { break; }
+		//     i++;
+		// };
+		// var scorer = Object.keys(players).filter(function(el){return players[el] == number})[0];
+		var scorer = scorerName(team);
 		document.querySelector('.fixture--' + team.replace(/\s+/g, '')).insertAdjacentHTML('beforeend','<p>'+scorer+'</p>');
 		!totalScorers[scorer] ?  totalScorers[scorer] = 1 : totalScorers[scorer] += 1;
 		!totalScorersWithTeam[team][scorer] ?  totalScorersWithTeam[team][scorer] = 1 : totalScorersWithTeam[team][scorer] += 1;
