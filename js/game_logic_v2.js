@@ -117,24 +117,24 @@ for(i=1;i<=team2ShotFinal;i++){
 
 var timer = 0;
 
-var intervalID = setInterval(function () {
-	timer+=1;
-	gameStats['minutesPlayed'] == timer;
-   if(minuteStats[timer]['team1Shots'] != 0){
- 	  incrementShotsAndCalculateScoreLikelihood('Manchester United',minuteStats[timer]['team1Shots'], timer, gameStats, 'team1Score', 'team1Scorers', 'team1Shots');
-   }else{
-   };
-   if(minuteStats[timer]['team2Shots'] != 0){
- 	  incrementShotsAndCalculateScoreLikelihood('Bournemouth', minuteStats[timer]['team2Shots'], timer, gameStats, 'team2Score', 'team2Scorers', 'team2Shots');
-   };  
-   if(minuteStats[timer]['team2Shots'] + minuteStats[timer]['team1Shots'] == 0){
-		console.log(timer + ' minutes: MANU ' + gameStats['team1Score'] + ' BOURN ' + gameStats['team2Score']);
-   };
-   if (timer === 90) {
-       window.clearInterval(intervalID);
-		console.log('score is MANU ' + gameStats['team1Score'] + ' BOURN ' + gameStats['team2Score'] );
-   }
-}, 100);
+// var intervalID = setInterval(function () {
+// 	timer+=1;
+// 	gameStats['minutesPlayed'] == timer;
+//    if(minuteStats[timer]['team1Shots'] != 0){
+//  	  incrementShotsAndCalculateScoreLikelihood('Manchester United',minuteStats[timer]['team1Shots'], timer, gameStats, 'team1Score', 'team1Scorers', 'team1Shots');
+//    }else{
+//    };
+//    if(minuteStats[timer]['team2Shots'] != 0){
+//  	  incrementShotsAndCalculateScoreLikelihood('Bournemouth', minuteStats[timer]['team2Shots'], timer, gameStats, 'team2Score', 'team2Scorers', 'team2Shots');
+//    };  
+//    if(minuteStats[timer]['team2Shots'] + minuteStats[timer]['team1Shots'] == 0){
+// 		console.log(timer + ' minutes: MANU ' + gameStats['team1Score'] + ' BOURN ' + gameStats['team2Score']);
+//    };
+//    if (timer === 90) {
+//        window.clearInterval(intervalID);
+// 		console.log('score is MANU ' + gameStats['team1Score'] + ' BOURN ' + gameStats['team2Score'] );
+//    }
+// }, 100);
 
 
 function incrementShotsAndCalculateScoreLikelihood(teamName, shotCount, minute, gameStats, score, scorers, shots){
@@ -153,13 +153,3 @@ function incrementShotsAndCalculateScoreLikelihood(teamName, shotCount, minute, 
 function isAGoal(){
 	return shuffle([true, false, false, false])[0];
 };
-
-
-
-
-
-
-
-
-
-

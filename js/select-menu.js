@@ -1,0 +1,1 @@
+const choices = new Choices('.team-selector');
