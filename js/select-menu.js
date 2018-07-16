@@ -20,10 +20,12 @@ document.addEventListener("drop", function(event) {
     var remove = event.dataTransfer.getData("remove");
     if(remove){
     	var toClearParent = document.querySelector('.no-content-transfer[data-player="'+player+'"]');
+    	// debugger
     	toClearParent.childNodes[1].innerText = "";
     	toClearParent.removeAttribute('data-player');
     }else{
-	    var spanElement = event.target.childNodes[1];
+	    var spanElement = event.target.nextElementSibling;
+	    // debugger
 	    event.target.setAttribute('data-player', player);
 	    if(spanElement){
 		    spanElement.innerHTML = player;
