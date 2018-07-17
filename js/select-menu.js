@@ -6,7 +6,7 @@ function populatePlayers(){
 	var selecter = document.getElementById(event.target.id + '-list');
 	selecter.innerHTML = "";	
 	for(i=0;i<playerlist.length;i++){
-		selecter.insertAdjacentHTML('beforeend', '<li draggable="true" class="drag-player content-transfer">'+playerlist[i]+'</li>');
+		selecter.insertAdjacentHTML('beforeend', '<li draggable="true" data-player="'+playerlist[i]+'" class="drag-player content-transfer">'+playerlist[i]+'</li>');
 	}
 };
 
@@ -19,16 +19,26 @@ document.addEventListener("drop", function(event) {
     var player = event.dataTransfer.getData("player");
     var remove = event.dataTransfer.getData("remove");
     if(remove){
-    	var toClearParent = document.querySelector('.no-content-transfer[data-player="'+player+'"]');
-    	// debugger
-    	toClearParent.childNodes[1].innerText = "";
+    	var toClearParent = document.querySelector('.position-blob[data-player="'+player+'"]');
+    	var toReactivate = document.querySelector('.drag-player.content-transfer[data-player="'+player+'"]');
+    	toClearParent.nextElementSibling.innerText = "";
     	toClearParent.removeAttribute('data-player');
+    	toReactivate.setAttribute('draggable', true);
+    	toReactivate.classList.remove('inactive');
+
     }else{
 	    var spanElement = event.target.nextElementSibling;
-	    // debugger
-	    event.target.setAttribute('data-player', player);
+	    var toReactivate = document.querySelector('.drag-player.content-transfer[data-player="'+player+'"]');
 	    if(spanElement){
-		    spanElement.innerHTML = player;
+
+	    	if(event.target.classList.length  > 0){
+	    		if(event.target.classList[0] == "position-blob"){
+		    		spanElement.innerHTML = player;
+	    			event.target.setAttribute('data-player', player);
+		    		toReactivate.setAttribute('draggable', false);
+    				toReactivate.classList.add('inactive');
+	    		};
+	    	};
 	    };    	
     }
 });

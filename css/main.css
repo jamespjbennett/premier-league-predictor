@@ -191,6 +191,14 @@ li{
     bottom: -27px;	
 }
 
+.drag-player.content-transfer:hover{
+	cursor: pointer;
+}
+
+.drag-player.content-transfer.inactive{
+	text-decoration: line-through;
+}
+
 @font-face { 
 	font-family: Moon2-regular; 
 	src: url('../fonts/Moon2.0-Regular.otf'); 
