@@ -199,6 +199,14 @@ li{
 	text-decoration: line-through;
 }
 
+.play-game-container{
+	text-align: center;
+}
+
+.play-game-container .btn{
+	font-size: 22px;
+}
+
 @font-face { 
 	font-family: Moon2-regular; 
 	src: url('../fonts/Moon2.0-Regular.otf'); 
