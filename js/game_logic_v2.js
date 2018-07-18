@@ -1,3 +1,5 @@
+var timer = 0;
+
 Array.prototype.sum = function (prop) {
     var total = 0
     for ( var i = 0, _len = this.length; i < _len; i++ ) {
@@ -37,6 +39,7 @@ function playDetailedGamed(){
 	var team2 = generateTeam(awayTeamName, 'away-team');
 	var team1Shots = calculateShots(team1);
 	var team2Shots = calculateShots(team2);
+	startGameEngine(team1, team1Shots,team2,team2Shots);
 };
 
 
@@ -77,75 +80,88 @@ function calculateShots(object){
 	return objectShotFinal
 };
 
+function startGameEngine(team1, team1Shots,team2,team2Shots){
+	var gameStats = generateGameStats();
+	var minuteStats = generateMinuteStats(team1Shots, team2Shots);
+	playGameWithEngine(gameStats, minuteStats,team1, team2);
+};
 
-// var gameStats = {
-// 	'team1Score': 0,
-// 	'team1Scorers':{},
-// 	'team2Score': 0,
-// 	'team2Scorers':{},
-// 	'team1Shots': 0,
-// 	'team2Shots': 0,
-// 	'minutesPlayed': 0,
-// };
+function generateGameStats(){
+	return {
+		'team1Score': 0,
+		'team1Scorers':{},
+		'team2Score': 0,
+		'team2Scorers':{},
+		'team1Shots': 0,
+		'team2Shots': 0,
+		'minutesPlayed': 0,
+	};
+};
 
-// var minuteStats = {};
-// for(i=1; i<=90;i++){
-// 	minuteStats[i] = {
-// 		'team1Shots': 0,
-// 		'team2Shots': 0
-// 	};
-// };
 
-// for(i=1;i<=team1ShotFinal;i++){
-// 	var minute = shuffle(Object.keys(minuteStats))[0];
-// 	minuteStats[minute]["team1Shots"] = minuteStats[minute]["team1Shots"] + 1;
-// };
+function generateMinuteStats(team1Shots, team2Shots){
+	var minuteStats = {};
+	for(i=1; i<=90;i++){
+		minuteStats[i] = {
+			'team1Shots': 0,
+			'team2Shots': 0
+		};
+	};
+	for(i=1;i<=team1Shots;i++){
+		var minute = shuffle(Object.keys(minuteStats))[0];
+		minuteStats[minute]["team1Shots"] = minuteStats[minute]["team1Shots"] + 1;
+	};
 
-// for(i=1;i<=team2ShotFinal;i++){
-// 	var minute = shuffle(Object.keys(minuteStats))[0];
-// 	minuteStats[minute]["team2Shots"] = minuteStats[minute]["team2Shots"] + 1;
-// }
+	for(i=1;i<=team2Shots;i++){
+		var minute = shuffle(Object.keys(minuteStats))[0];
+		minuteStats[minute]["team2Shots"] = minuteStats[minute]["team2Shots"] + 1;
+	}
+	return minuteStats;
+};
 
 // PLAY GAME
 
-var timer = 0;
+function playGameWithEngine(gameStats, minuteStats,team1, team2){
+	console.log(team1);
+	console.log(team2);
+	var intervalID = setInterval(function () {
+		timer+=1;
+		gameStats['minutesPlayed'] == timer;
+	   if(minuteStats[timer]['team1Shots'] != 0){
+	 	  incrementShotsAndCalculateScoreLikelihood(team1['name'],minuteStats[timer]['team1Shots'], timer, gameStats, 'team1Score', 'team1Scorers', 'team1Shots');
+	   }else{
+	   };
+	   if(minuteStats[timer]['team2Shots'] != 0){
+	 	  incrementShotsAndCalculateScoreLikelihood(team2['name'], minuteStats[timer]['team2Shots'], timer, gameStats, 'team2Score', 'team2Scorers', 'team2Shots');
+	   };  
+	   if(minuteStats[timer]['team2Shots'] + minuteStats[timer]['team1Shots'] == 0){
+			console.log(timer + ' minutes: '+team1['name']+' ' + gameStats['team1Score'] + ' '+team2['name']+' ' + gameStats['team2Score']);
+	   };
+	   if (timer === 90) {
+	       window.clearInterval(intervalID);
+			console.log('score is '+team1['name']+' ' + gameStats['team1Score'] + ' '+team2['name']+' ' + gameStats['team2Score'] );
+	   }
+	}, 100);	
+};
 
-// var intervalID = setInterval(function () {
-// 	timer+=1;
-// 	gameStats['minutesPlayed'] == timer;
-//    if(minuteStats[timer]['team1Shots'] != 0){
-//  	  incrementShotsAndCalculateScoreLikelihood('Manchester United',minuteStats[timer]['team1Shots'], timer, gameStats, 'team1Score', 'team1Scorers', 'team1Shots');
-//    }else{
-//    };
-//    if(minuteStats[timer]['team2Shots'] != 0){
-//  	  incrementShotsAndCalculateScoreLikelihood('Bournemouth', minuteStats[timer]['team2Shots'], timer, gameStats, 'team2Score', 'team2Scorers', 'team2Shots');
-//    };  
-//    if(minuteStats[timer]['team2Shots'] + minuteStats[timer]['team1Shots'] == 0){
-// 		console.log(timer + ' minutes: MANU ' + gameStats['team1Score'] + ' BOURN ' + gameStats['team2Score']);
-//    };
-//    if (timer === 90) {
-//        window.clearInterval(intervalID);
-// 		console.log('score is MANU ' + gameStats['team1Score'] + ' BOURN ' + gameStats['team2Score'] );
-//    }
-// }, 100);
 
 
-// function incrementShotsAndCalculateScoreLikelihood(teamName, shotCount, minute, gameStats, score, scorers, shots){
-// 	for(z=1;z<=shotCount;z++){
-// 		gameStats[shots] += 1;
-// 		if(isAGoal()){
-// 			gameStats[score] +=1;
-// 			gameStats[scorers][minute] = scorerName(teamName);
-// 			console.log('GOAL FOR '+teamName+'!! score is MANU ' + gameStats['team1Score'] + ' BOURN ' + gameStats['team2Score'] );
-// 		}else{
-// 			console.log('shot for '+teamName+'. score is MANU ' + gameStats['team1Score'] + ' BOURN ' + gameStats['team2Score'] );
-// 		}
-// 	};
-// };
+function incrementShotsAndCalculateScoreLikelihood(teamName, shotCount, minute, gameStats, score, scorers, shots){
+	for(z=1;z<=shotCount;z++){
+		gameStats[shots] += 1;
+		if(isAGoal()){
+			gameStats[score] +=1;
+			gameStats[scorers][minute] = scorerName(teamName);
+			console.log('GOAL FOR '+teamName+'!! score is MANU ' + gameStats['team1Score'] + ' BOURN ' + gameStats['team2Score'] );
+		}else{
+			console.log('shot for '+teamName+'. score is MANU ' + gameStats['team1Score'] + ' BOURN ' + gameStats['team2Score'] );
+		}
+	};
+};
 
-// function isAGoal(){
-// 	return shuffle([true, false, false, false])[0];
-// };
+function isAGoal(){
+	return shuffle([true, false, false, false])[0];
+};
 
 document.getElementById('play-game').onclick = function(e){
   playDetailedGamed();
