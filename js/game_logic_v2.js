@@ -2,7 +2,7 @@ var timer = 0;
 
 Array.prototype.sum = function (prop) {
     var total = 0
-    for ( var i = 0, _len = this.length; i < _len; i++ ) {
+    for ( var i = 1, _len = this.length; i < _len; i++ ) {
         total += this[i][prop]
     }
     return total
@@ -37,8 +37,11 @@ function playDetailedGamed(){
 	var awayTeamName = document.getElementById('away').value
 	var team1 = generateTeam(homeTeamName, 'home-team');
 	var team2 = generateTeam(awayTeamName, 'away-team');
-	var team1Shots = calculateShots(team1);
-	var team2Shots = calculateShots(team2);
+	var team1Shots = calculateShots(team1, team2);
+	console.log('team 1 shots is ' + team1Shots)
+	var team2Shots = calculateShots(team2, team1);
+	console.log('team 2 shots is ' + team2Shots)
+
 	startGameEngine(team1, team1Shots,team2,team2Shots);
 };
 
@@ -50,7 +53,7 @@ function generateTeam(team, selector){
 	var parentDiv = document.querySelector("."+selector);
 	var playerSelection = parentDiv.querySelectorAll('.position-blob');
 	for(i=0;i<playerSelection.length;i++){
-		var player = playerSelection[1].getAttribute('data-player');
+		var player = playerSelection[i].getAttribute('data-player');
 		object['players'].push(teamsV2[team]['players'][player])
 	};
 	return object;
@@ -67,13 +70,13 @@ function generateTeam(team, selector){
 // // TRIAL AND ERROR CALCULATION TO GET HOW MANY SHOTS THE TEAM WILL HAVE
 
 
-function calculateShots(object){
+function calculateShots(attackingTeam, defendingTeam){
 	// TEAMS ATTACK AND DEFENCE RATINGS ARE CALCULATED BASED ON THE PLAYERS
-	object['attack'] = object["players"].sum("attack");
-	object['defence'] = object["players"].sum("defence");	
+	attackingTeam['attack'] = attackingTeam["players"].sum("attack");
+	attackingTeam['defence'] = defendingTeam["players"].sum("defence");	
 	// CALCULATION TO GET HOW MANY SHOTS THE TEAM WILL HAVE
-	var objectMaxShots = object["players"].sum("attack") / 24;
-	var objectShotRemoval = object['defence'] / 35;
+	var objectMaxShots = attackingTeam["players"].sum("attack") / 24;
+	var objectShotRemoval = attackingTeam['defence'] / 35;
 	var objectShotsAverage = Math.round(objectMaxShots - objectShotRemoval);
 	var objectShotPossibilties = likelyShotsArray(objectShotsAverage).sort();
 	var objectShotFinal = shuffle(objectShotPossibilties)[0];
@@ -82,7 +85,11 @@ function calculateShots(object){
 
 function startGameEngine(team1, team1Shots,team2,team2Shots){
 	var gameStats = generateGameStats();
+	console.log('gameStats is ' )
+	console.log(gameStats);
 	var minuteStats = generateMinuteStats(team1Shots, team2Shots);
+	console.log('minuteStats is ')
+	console.log(minuteStats);
 	playGameWithEngine(gameStats, minuteStats,team1, team2);
 };
 
@@ -124,6 +131,7 @@ function generateMinuteStats(team1Shots, team2Shots){
 function playGameWithEngine(gameStats, minuteStats,team1, team2){
 	console.log(team1);
 	console.log(team2);
+
 	var intervalID = setInterval(function () {
 		timer+=1;
 		gameStats['minutesPlayed'] == timer;
@@ -140,8 +148,9 @@ function playGameWithEngine(gameStats, minuteStats,team1, team2){
 	   if (timer === 90) {
 	       window.clearInterval(intervalID);
 			console.log('score is '+team1['name']+' ' + gameStats['team1Score'] + ' '+team2['name']+' ' + gameStats['team2Score'] );
+			timer = 0;
 	   }
-	}, 100);	
+	}, 50);	
 };
 
 
@@ -152,9 +161,9 @@ function incrementShotsAndCalculateScoreLikelihood(teamName, shotCount, minute, 
 		if(isAGoal()){
 			gameStats[score] +=1;
 			gameStats[scorers][minute] = scorerName(teamName);
-			console.log('GOAL FOR '+teamName+'!! score is MANU ' + gameStats['team1Score'] + ' BOURN ' + gameStats['team2Score'] );
+			console.log('GOAL FOR '+teamName+'!! score is '+teamName+' ' + gameStats['team1Score'] + ' ' + teamName +' ' +gameStats['team2Score'] );
 		}else{
-			console.log('shot for '+teamName+'. score is MANU ' + gameStats['team1Score'] + ' BOURN ' + gameStats['team2Score'] );
+			console.log('shot for '+teamName+'. score is '+teamName+' ' + gameStats['team1Score'] + ' ' +teamName + ' ' + gameStats['team2Score'] );
 		}
 	};
 };

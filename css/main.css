@@ -14,10 +14,12 @@ li{
 }
 
 .navbar-brand{
-	padding: 8px 34px!important;
-	font-size: 29px!important;
-	font-family: Moon2-bold;
-	letter-spacing: 7px;
+    padding: 8px 34px!important;
+    font-size: 24px!important;
+    font-family: Moon2-bold;
+    letter-spacing: 7px;
+    height:inherit!important;
+    line-height: 7px!important;
 }
 
 .content-header{
@@ -130,22 +132,30 @@ li{
 
 .nav-item {
     padding: 22px 19px!important;
-    font-size: 17px!important;
+    font-size: 14px!important;
     font-family: Moon2-bold;
     letter-spacing: 3px;
-    height: 80px;
+    height:inherit!important;
     color: #E6E6E6;
     float: right;
     word-spacing: -8px;
 }
 
+.nav-item .nav-link{
+    vertical-align: middle;
+}
+
 .home-team, .away-team{
-	text-align: center;
-    font-size: 20px;
-    margin-top: 40px;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
     font-family: Moon2-bold;
     letter-spacing: 2px;
     word-spacing: -7px;
+}
+
+.home-team h3, .away-team h3{
+    font-size: 16px;
 }
 
 .nav-item a{

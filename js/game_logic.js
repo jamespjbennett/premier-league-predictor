@@ -60,7 +60,6 @@ function play_game(first_team, second_team){
 
 function scorerName(team){
 	var random = parseFloat(((Math.random() * 100) / 10).toFixed(1))
-	debugger
 	var players = teams[team]['players'];
 	var scores = Object.values(players).sort();
 	var i = 0;
