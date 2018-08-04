@@ -217,6 +217,11 @@ li{
 	font-size: 22px;
 }
 
+.game-action-info{
+    overflow: scroll;
+    height: 100vh;
+}
+
 @font-face { 
 	font-family: Moon2-regular; 
 	src: url('../fonts/Moon2.0-Regular.otf'); 

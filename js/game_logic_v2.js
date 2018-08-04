@@ -131,23 +131,26 @@ function generateMinuteStats(team1Shots, team2Shots){
 function playGameWithEngine(gameStats, minuteStats,team1, team2){
 	console.log(team1);
 	console.log(team2);
-
+	var gameActionReportScroller = document.getElementById('game-action-info');
+	document.getElementById('game-prep-container').classList.add("hidden");
+	document.getElementById('game-engine-show').classList.remove("hidden");
 	var intervalID = setInterval(function () {
 		timer+=1;
 		gameStats['minutesPlayed'] == timer;
 	   if(minuteStats[timer]['team1Shots'] != 0){
 	 	  incrementShotsAndCalculateScoreLikelihood(team1['name'],minuteStats[timer]['team1Shots'], timer, gameStats, 'team1Score', 'team1Scorers', 'team1Shots');
-	   }else{
-	   };
+	   }
 	   if(minuteStats[timer]['team2Shots'] != 0){
 	 	  incrementShotsAndCalculateScoreLikelihood(team2['name'], minuteStats[timer]['team2Shots'], timer, gameStats, 'team2Score', 'team2Scorers', 'team2Shots');
 	   };  
 	   if(minuteStats[timer]['team2Shots'] + minuteStats[timer]['team1Shots'] == 0){
-			console.log(timer + ' minutes: '+team1['name']+' ' + gameStats['team1Score'] + ' '+team2['name']+' ' + gameStats['team2Score']);
+			// console.log(timer + ' minutes: '+team1['name']+' ' + gameStats['team1Score'] + ' '+team2['name']+' ' + gameStats['team2Score']);
+			gameActionReportScroller.insertAdjacentHTML('afterbegin','<p>'+timer + ' minutes: '+team1['name']+' ' + gameStats['team1Score'] + ' '+team2['name']+' ' + gameStats['team2Score']+'</p>')
 	   };
 	   if (timer === 90) {
-	       window.clearInterval(intervalID);
-			console.log('score is '+team1['name']+' ' + gameStats['team1Score'] + ' '+team2['name']+' ' + gameStats['team2Score'] );
+	    	window.clearInterval(intervalID);
+	       	gameActionReportScroller.insertAdjacentHTML('afterbegin', '<p>score is '+team1['name']+' ' + gameStats['team1Score'] + ' '+team2['name']+' ' + gameStats['team2Score'] +'</p>')
+			// console.log('score is '+team1['name']+' ' + gameStats['team1Score'] + ' '+team2['name']+' ' + gameStats['team2Score'] );
 			timer = 0;
 	   }
 	}, 50);	
@@ -156,14 +159,17 @@ function playGameWithEngine(gameStats, minuteStats,team1, team2){
 
 
 function incrementShotsAndCalculateScoreLikelihood(teamName, shotCount, minute, gameStats, score, scorers, shots){
+	var gameActionReportScroller = document.getElementById('game-action-info');
 	for(z=1;z<=shotCount;z++){
 		gameStats[shots] += 1;
 		if(isAGoal()){
 			gameStats[score] +=1;
 			gameStats[scorers][minute] = scorerName(teamName);
-			console.log('GOAL FOR '+teamName+'!! score is '+teamName+' ' + gameStats['team1Score'] + ' ' + teamName +' ' +gameStats['team2Score'] );
+			gameActionReportScroller.insertAdjacentHTML('afterbegin', '<p>GOAL FOR '+teamName+'!! score is '+teamName+' ' + gameStats['team1Score'] + ' ' + teamName +' ' +gameStats['team2Score'] + '</p>')
+			// console.log('GOAL FOR '+teamName+'!! score is '+teamName+' ' + gameStats['team1Score'] + ' ' + teamName +' ' +gameStats['team2Score'] );
 		}else{
-			console.log('shot for '+teamName+'. score is '+teamName+' ' + gameStats['team1Score'] + ' ' +teamName + ' ' + gameStats['team2Score'] );
+			gameActionReportScroller.insertAdjacentHTML('afterbegin', '<p>shot for '+teamName+'. score is '+teamName+' ' + gameStats['team1Score'] + ' ' +teamName + ' ' + gameStats['team2Score'] + '</p>')
+			// console.log('shot for '+teamName+'. score is '+teamName+' ' + gameStats['team1Score'] + ' ' +teamName + ' ' + gameStats['team2Score'] );
 		}
 	};
 };

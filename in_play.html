@@ -29,142 +29,151 @@
               </li>
         </nav>
         <div class="main-wrapper">
-            <div class="col-xs-12">
-                <div class="col-xs-6 home-team">
-                   <h3>Pick Home Team</h3>
-                   <select class="team-selector" id="home" onchange="populatePlayers()">
-                       <option value="Manchester United">Manchester United</option>
-                       <option value="Bournemouth">Bournemouth</option>
-                   </select>
-                   <div class="row team-selection" >
-                       <div class="col-xs-9">
-                            <div class="row">
-                               <div class="no-content-transfer col-xs-12">
-                                <div class="position-blob">GK</div>
-                                <span draggable="true"></span>
-                               </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="no-content-transfer col-xs-3">
-                                    <div class="position-blob">DR</div>
-                                    <span draggable="true"></span>
-                                </div>
-                                <div class="no-content-transfer col-xs-3">
-                                    <div class="position-blob">DL</div>
-                                    <span draggable="true"></span>
-                                </div>
-                                <div class="no-content-transfer col-xs-3">
-                                    <div class="position-blob">DC</div>
-                                    <span draggable="true"></span>
-                                </div>
-                                <div class="no-content-transfer col-xs-3">
-                                    <div class="position-blob">DC</div>
-                                    <span draggable="true"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="no-content-transfer col-xs-3">
-                                    <div class="position-blob">MR</div>
-                                    <span draggable="true"></span>
-                                </div>
-                                <div class="no-content-transfer col-xs-3">
-                                    <div class="position-blob">MC</div>
-                                    <span draggable="true"></span>
-                                </div>
-                                <div class="no-content-transfer col-xs-3">
-                                    <div class="position-blob">MC</div>
-                                    <span draggable="true"></span>
-                                </div>
-                                <div class="no-content-transfer col-xs-3">
-                                    <div class="position-blob">ML</div>
-                                    <span draggable="true"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="no-content-transfer col-xs-6">
-                                    <div class="position-blob">FW</div>
-                                    <span draggable="true"></span>
-                                </div>
-                                <div class="no-content-transfer col-xs-6">
-                                    <div class="position-blob">FW</div>
-                                    <span draggable="true"></span>
-                                </div>  
-                            </div>
-                       </div>
-                       <div class="col-xs-2" id="home-list">
-                           
-                       </div>                      
-                   </div>
-                </div>
-                <div class="col-xs-6 away-team">
-                   <h3>Pick Away Team</h3>
-                   <select class="team-selector" id="away" onchange="populatePlayers()">
-                       <option value="Manchester United">Manchester United</option>
-                       <option value="Bournemouth">Bournemouth</option>
-                   </select>
-                   <div class="row team-selection " >
-                       <div class="col-xs-9">
-                            <div class="row">
-                                <div class="no-content-transfer col-xs-12">
+            <div id="game-prep-container">
+                <div class="col-xs-12">
+                    <div class="col-xs-6 home-team">
+                       <h3>Pick Home Team</h3>
+                       <select class="team-selector" id="home" onchange="populatePlayers()">
+                           <option value="Manchester United">Manchester United</option>
+                           <option value="Bournemouth">Bournemouth</option>
+                       </select>
+                       <div class="row team-selection" >
+                           <div class="col-xs-9">
+                                <div class="row">
+                                   <div class="no-content-transfer col-xs-12">
                                     <div class="position-blob">GK</div>
                                     <span draggable="true"></span>
+                                   </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="no-content-transfer col-xs-3">
-                                    <div class="position-blob">DR</div>
-                                    <span draggable="true"></span>
-                                </div> 
-                                <div class="no-content-transfer col-xs-3">
-                                    <div class="position-blob">DL</div>
-                                    <span draggable="true"></span>
+
+                                <div class="row">
+                                    <div class="no-content-transfer col-xs-3">
+                                        <div class="position-blob">DR</div>
+                                        <span draggable="true"></span>
+                                    </div>
+                                    <div class="no-content-transfer col-xs-3">
+                                        <div class="position-blob">DL</div>
+                                        <span draggable="true"></span>
+                                    </div>
+                                    <div class="no-content-transfer col-xs-3">
+                                        <div class="position-blob">DC</div>
+                                        <span draggable="true"></span>
+                                    </div>
+                                    <div class="no-content-transfer col-xs-3">
+                                        <div class="position-blob">DC</div>
+                                        <span draggable="true"></span>
+                                    </div>
                                 </div>
-                                <div class="no-content-transfer col-xs-3">
-                                    <div class="position-blob">DC</div>
-                                    <span draggable="true"></span>
+                                <div class="row">
+                                    <div class="no-content-transfer col-xs-3">
+                                        <div class="position-blob">MR</div>
+                                        <span draggable="true"></span>
+                                    </div>
+                                    <div class="no-content-transfer col-xs-3">
+                                        <div class="position-blob">MC</div>
+                                        <span draggable="true"></span>
+                                    </div>
+                                    <div class="no-content-transfer col-xs-3">
+                                        <div class="position-blob">MC</div>
+                                        <span draggable="true"></span>
+                                    </div>
+                                    <div class="no-content-transfer col-xs-3">
+                                        <div class="position-blob">ML</div>
+                                        <span draggable="true"></span>
+                                    </div>
                                 </div>
-                                <div class="no-content-transfer col-xs-3">
-                                    <div class="position-blob">DC</div>
-                                    <span draggable="true"></span>
+                                <div class="row">
+                                    <div class="no-content-transfer col-xs-6">
+                                        <div class="position-blob">FW</div>
+                                        <span draggable="true"></span>
+                                    </div>
+                                    <div class="no-content-transfer col-xs-6">
+                                        <div class="position-blob">FW</div>
+                                        <span draggable="true"></span>
+                                    </div>  
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="no-content-transfer col-xs-3">
-                                    <div class="position-blob">MR</div>
-                                    <span draggable="true"></span>
-                                </div>
-                                <div class="no-content-transfer col-xs-3">
-                                    <div class="position-blob">MC</div>
-                                    <span draggable="true"></span>
-                                </div>
-                                <div class="no-content-transfer col-xs-3">
-                                    <div class="position-blob">MC</div>
-                                    <span draggable="true"></span>
-                                </div>
-                                <div class="no-content-transfer col-xs-3">
-                                    <div class="position-blob">ML</div>
-                                    <span draggable="true"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="no-content-transfer col-xs-6">
-                                    <div class="position-blob">FW</div>
-                                    <span draggable="true"></span>
-                                </div>
-                                <div class="no-content-transfer col-xs-6">
-                                    <div class="position-blob">FW</div>
-                                    <span draggable="true"></span>
-                                </div>                      
-                            </div>
+                           </div>
+                           <div class="col-xs-2" id="home-list">
+                               
+                           </div>                      
                        </div>
-                       <div class="col-xs-2" id="away-list">
-                           
+                    </div>
+                    <div class="col-xs-6 away-team">
+                       <h3>Pick Away Team</h3>
+                       <select class="team-selector" id="away" onchange="populatePlayers()">
+                           <option value="Manchester United">Manchester United</option>
+                           <option value="Bournemouth">Bournemouth</option>
+                       </select>
+                       <div class="row team-selection " >
+                           <div class="col-xs-9">
+                                <div class="row">
+                                    <div class="no-content-transfer col-xs-12">
+                                        <div class="position-blob">GK</div>
+                                        <span draggable="true"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="no-content-transfer col-xs-3">
+                                        <div class="position-blob">DR</div>
+                                        <span draggable="true"></span>
+                                    </div> 
+                                    <div class="no-content-transfer col-xs-3">
+                                        <div class="position-blob">DL</div>
+                                        <span draggable="true"></span>
+                                    </div>
+                                    <div class="no-content-transfer col-xs-3">
+                                        <div class="position-blob">DC</div>
+                                        <span draggable="true"></span>
+                                    </div>
+                                    <div class="no-content-transfer col-xs-3">
+                                        <div class="position-blob">DC</div>
+                                        <span draggable="true"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="no-content-transfer col-xs-3">
+                                        <div class="position-blob">MR</div>
+                                        <span draggable="true"></span>
+                                    </div>
+                                    <div class="no-content-transfer col-xs-3">
+                                        <div class="position-blob">MC</div>
+                                        <span draggable="true"></span>
+                                    </div>
+                                    <div class="no-content-transfer col-xs-3">
+                                        <div class="position-blob">MC</div>
+                                        <span draggable="true"></span>
+                                    </div>
+                                    <div class="no-content-transfer col-xs-3">
+                                        <div class="position-blob">ML</div>
+                                        <span draggable="true"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="no-content-transfer col-xs-6">
+                                        <div class="position-blob">FW</div>
+                                        <span draggable="true"></span>
+                                    </div>
+                                    <div class="no-content-transfer col-xs-6">
+                                        <div class="position-blob">FW</div>
+                                        <span draggable="true"></span>
+                                    </div>                      
+                                </div>
+                           </div>
+                           <div class="col-xs-2" id="away-list">
+                               
+                           </div>
                        </div>
-                   </div>
+                    </div>
+                    <div class="col-xs-12 play-game-container">
+                        <button id="play-game" class="btn btn-primary">PLAY GAME</button>
+                    </div>
                 </div>
-                <div class="col-xs-12 play-game-container">
-                    <button id="play-game" class="btn btn-primary">PLAY GAME</button>
+            </div>
+            <div id="game-engine-show" class="hidden container">
+                <div class="col-xs-12">                
+                    <div id="game-action-info">
+                        <p>0: KICK OFF </p>
+                    </div>
                 </div>
             </div>
         </div>
