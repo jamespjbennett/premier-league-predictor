@@ -217,9 +217,17 @@ li{
 	font-size: 22px;
 }
 
-.game-action-info{
+#game-action-info{
     overflow: scroll;
-    height: 100vh;
+    height: 50vh;
+    background: #297373;
+    padding: 15px;
+    margin-bottom: 27px;
+}
+
+#score-headline{
+    font-size: 22px;
+    font-weight: bold;
 }
 
 @font-face { 

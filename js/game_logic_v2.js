@@ -129,8 +129,6 @@ function generateMinuteStats(team1Shots, team2Shots){
 // PLAY GAME
 
 function playGameWithEngine(gameStats, minuteStats,team1, team2){
-	console.log(team1);
-	console.log(team2);
 	var gameActionReportScroller = document.getElementById('game-action-info');
 	document.getElementById('game-prep-container').classList.add("hidden");
 	document.getElementById('game-engine-show').classList.remove("hidden");
@@ -138,38 +136,48 @@ function playGameWithEngine(gameStats, minuteStats,team1, team2){
 		timer+=1;
 		gameStats['minutesPlayed'] == timer;
 	   if(minuteStats[timer]['team1Shots'] != 0){
-	 	  incrementShotsAndCalculateScoreLikelihood(team1['name'],minuteStats[timer]['team1Shots'], timer, gameStats, 'team1Score', 'team1Scorers', 'team1Shots');
+	 	  incrementShotsAndCalculateScoreLikelihood(team1['name'],minuteStats[timer]['team1Shots'], timer, gameStats, 'team1Score', 'team1Scorers', 'team1Shots', team1['name'], team2['name']);
 	   }
 	   if(minuteStats[timer]['team2Shots'] != 0){
-	 	  incrementShotsAndCalculateScoreLikelihood(team2['name'], minuteStats[timer]['team2Shots'], timer, gameStats, 'team2Score', 'team2Scorers', 'team2Shots');
+	 	  incrementShotsAndCalculateScoreLikelihood(team2['name'], minuteStats[timer]['team2Shots'], timer, gameStats, 'team2Score', 'team2Scorers', 'team2Shots', team1['name'], team2['name']);
 	   };  
 	   if(minuteStats[timer]['team2Shots'] + minuteStats[timer]['team1Shots'] == 0){
-			// console.log(timer + ' minutes: '+team1['name']+' ' + gameStats['team1Score'] + ' '+team2['name']+' ' + gameStats['team2Score']);
 			gameActionReportScroller.insertAdjacentHTML('afterbegin','<p>'+timer + ' minutes: '+team1['name']+' ' + gameStats['team1Score'] + ' '+team2['name']+' ' + gameStats['team2Score']+'</p>')
 	   };
 	   if (timer === 90) {
 	    	window.clearInterval(intervalID);
-	       	gameActionReportScroller.insertAdjacentHTML('afterbegin', '<p>score is '+team1['name']+' ' + gameStats['team1Score'] + ' '+team2['name']+' ' + gameStats['team2Score'] +'</p>')
-			// console.log('score is '+team1['name']+' ' + gameStats['team1Score'] + ' '+team2['name']+' ' + gameStats['team2Score'] );
+	       	gameActionReportScroller.insertAdjacentHTML('afterbegin', '<p>FINAL SCORE is '+team1['name']+' ' + gameStats['team1Score'] + ' '+team2['name']+' ' + gameStats['team2Score'] +'</p>')
 			timer = 0;
 	   }
-	}, 50);	
+	   var scorersDiv = document.getElementById('scorers-info');
+	   var homeTeamNameElement = document.getElementById('home-team-name');
+	   homeTeamNameElement.textContent = team1['name'];
+	   var homeTeamScoreElement = document.getElementById('home-team-score');
+	   homeTeamScoreElement.textContent = gameStats['team1Score']
+	   var awayTeamNameElement = document.getElementById('away-team-name');
+	   awayTeamNameElement.textContent = team2['name']
+	   var awayTeamScoreElement = document.getElementById('away-team-score');
+	   awayTeamScoreElement.textContent = gameStats['team2Score'];
+	}, 500);	
 };
 
 
 
-function incrementShotsAndCalculateScoreLikelihood(teamName, shotCount, minute, gameStats, score, scorers, shots){
+function incrementShotsAndCalculateScoreLikelihood(teamName, shotCount, minute, gameStats, score, scorers, shots, homeTeam, awayTeam){
 	var gameActionReportScroller = document.getElementById('game-action-info');
 	for(z=1;z<=shotCount;z++){
 		gameStats[shots] += 1;
 		if(isAGoal()){
 			gameStats[score] +=1;
 			gameStats[scorers][minute] = scorerName(teamName);
-			gameActionReportScroller.insertAdjacentHTML('afterbegin', '<p>GOAL FOR '+teamName+'!! score is '+teamName+' ' + gameStats['team1Score'] + ' ' + teamName +' ' +gameStats['team2Score'] + '</p>')
-			// console.log('GOAL FOR '+teamName+'!! score is '+teamName+' ' + gameStats['team1Score'] + ' ' + teamName +' ' +gameStats['team2Score'] );
+			gameActionReportScroller.insertAdjacentHTML('afterbegin', '<p>'+minute+' GOAL FOR '+teamName+'!! '+gameStats[scorers][minute]+' scores. Score is '+homeTeam+' ' + gameStats['team1Score'] + ' ' + awayTeam +' ' +gameStats['team2Score'] + '</p>');
+			homeOrAwayScorerDiv = teamName == homeTeam ? document.getElementById('home-team-scorers') :  document.getElementById('away-team-scorers');
+			var homeOrAwayScorerObject = teamName == homeTeam ? gameStats.team1Scorers : gameStats.team2Scorers
+			var scorersLength = Object.keys(homeOrAwayScorerObject).length
+			var key = Object.keys(homeOrAwayScorerObject)[scorersLength-1];
+		   	homeOrAwayScorerDiv.insertAdjacentHTML('beforeend', '<p>'+homeOrAwayScorerObject[key]+' ('+minute+')</p>');
 		}else{
-			gameActionReportScroller.insertAdjacentHTML('afterbegin', '<p>shot for '+teamName+'. score is '+teamName+' ' + gameStats['team1Score'] + ' ' +teamName + ' ' + gameStats['team2Score'] + '</p>')
-			// console.log('shot for '+teamName+'. score is '+teamName+' ' + gameStats['team1Score'] + ' ' +teamName + ' ' + gameStats['team2Score'] );
+			gameActionReportScroller.insertAdjacentHTML('afterbegin', '<p>shot for '+teamName+'. score is '+homeTeam+' ' + gameStats['team1Score'] + ' ' +awayTeam + ' ' + gameStats['team2Score'] + '</p>')
 		}
 	};
 };
